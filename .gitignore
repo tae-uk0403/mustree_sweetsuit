@@ -1,0 +1,19 @@
+# 특정 파일 무시
+# filename.txt
+
+# 특정 폴더 무시
+# folder_name/
+
+# 특정 파일 확장자 무시
+# *.log          # 모든 .log 파일 무시
+# *.tmp          # 모든 .tmp 파일 무시
+
+# 특정 폴더 안의 모든 파일 무시
+temp_process_task_files/*
+removed_bg_model/*
+
+# 하위 모든 디렉토리의 특정 폴더 무시
+# **/folder_name/
+
+*.pth
+
