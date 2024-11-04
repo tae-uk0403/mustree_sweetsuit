@@ -1,0 +1,76 @@
+{
+    "400": {
+        "content": {
+            "application/json": {
+                "examples": {
+                    "hheelo": {
+                        "value": {
+                            "errors": [
+                                {
+                                    "title": "Invalid parameters or input file unprocessable (no credits charged)"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "description": "Invalid parameters or input file unprocessable (no credits charged)"
+    },
+    "402": {
+        "content": {
+            "application/json": {
+                "example": {
+                    "errors": [
+                        {
+                            "title": "Insufficient credits"
+                        }
+                    ]
+                }
+            }
+        },
+        "description": "Error: Insufficient credits(no credits charged)"
+    },
+    "403": {
+        "content": {
+            "application/json": {
+                "example": {
+                    "errors": [
+                        {
+                            "title": "Missing API Key"
+                        }
+                    ]
+                }
+            }
+        },
+        "description": "Error: Authentication failed(no credits charged)"
+    },
+    "429": {
+        "content": {
+            "application/json": {
+                "example": {
+                    "errors": [
+                        {
+                            "title": "Rate limit exceeded"
+                        }
+                    ]
+                }
+            }
+        },
+        "description": "Error: Rate limit exceeded(no credits charged)"
+    },
+    "500": {
+        "content": {
+            "application/json": {
+                "example": {
+                    "errors": [
+                        {
+                            "title": "Internal Server Error"
+                        }
+                    ]
+                }
+            }
+        },
+        "description": "Error: Internal Server Error"
+    }
+}
