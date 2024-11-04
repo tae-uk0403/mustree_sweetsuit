@@ -1,21 +1,15 @@
-# 3D Point Cloud Data Analysis Model Using Mobile Devices
+# 달콤정장 신체 자동 치수측정 API
 
-**Authors**: YongHo Jeong, TaeUk Noh, YongHak Lee, SeonJae Lee, KwangIl Choi, SungHwan Kim  
-**Institution**: Department of Applied Statistics, Konkuk University
 
 ## 목차
 
-- [개요](#개요)
-- [연구 목적](#연구-목적)
-- [관련 연구](#관련-연구)
-- [연구 방법론](#연구-방법론)
+- [서비스 소개]
+- [솔루션]
+- [솔루션 고도화]
   - [1. 키포인트와 3D 데이터 병합](#1-키포인트와-3d-데이터-병합)
   - [2. 균일한 3차원 데이터 활용](#2-균일한-3차원-데이터-활용)
   - [3. 실험 환경 및 데이터셋](#3-실험-환경-및-데이터셋)
-- [실험 결과](#실험-결과)
-- [결론](#결론)
-- [참고 문헌](#참고-문헌)
-
+- [업데이트 내역]
 ---
 
 ## 개요
