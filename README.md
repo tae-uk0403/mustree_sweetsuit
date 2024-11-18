@@ -4,7 +4,7 @@
 
 ## API 정보
 - ### **API Swagger**
-     **`http://203.252.147.202:8200/docs`**
+     **http://203.252.147.202:8200/docs**
 
 - ### **Request parameters**
      - **Path Parameter**
@@ -19,6 +19,14 @@
           - `image_side_file`: 신체 측면 이미지 (PNG 형식)
           - `json_front_file`: 앞면 3D 깊이 데이터 (JSON 형식)
           - `json_side_file`: 측면 3D 깊이 데이터 (JSON 형식)
+     - **Example**
+          - `image_front_file`
+          ![Example Image](https://github.com/MustreeAI/fix-coner-algorithm/blob/main/public/wrong_correction_image.png)
+
+
+          - `image_side_file`: 신체 측면 이미지 (PNG 형식)
+          - `json_front_file`: 앞면 3D 깊이 데이터 (JSON 형식)
+          - `json_side_file`: 측면 3D 깊이 데이터 (JSON 형식)
 
 - ### **Response**
      성공적인 요청 시, 응답으로 신체 측정 결과가 포함된 ZIP 파일을 반환합니다.
@@ -27,6 +35,7 @@
      - **내용물**:
           - `key_measure_result.png`: 신체 둘레 측정 결과 이미지
           - `result_circum.json`: 신체 둘레 측정 결과 JSON 데이터
+- ### **Example**
 
 
 ## Getting Started
@@ -39,6 +48,12 @@
 
 ## 고도화 연구
 ### 1. Edge detection 기반 keypoint 보정 알고리즘 개발
+#### 문제 상황
+- 2차원에서 찾은 keypoint의 
+- depth값을 0부터 255로 정규화하고, Canny edge detection 알고리즘으로 edge detection
+- 경
+     
+
 ### 2. 배경제거를 통한 Keypoint Detection 정확도 향상
 
 
