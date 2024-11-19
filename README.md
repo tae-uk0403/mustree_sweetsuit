@@ -23,7 +23,7 @@
 
           - `image_front_file`
 
-              <img src="https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/image_front.jpg" alt="Example Image" width="720" height="860">
+              <img src="https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/image_front.jpg" alt="Example Image" width="360" height="860">
 
           - `image_side_file`: 신체 측면 이미지
 
@@ -39,7 +39,7 @@
 - ### **Example**
      - `key_measure_result.png`
 
-          <img src="https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/key_measure_result.jpg" alt="Example Image" width="720" height="860">
+          <img src="https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/key_measure_result.png" alt="Example Image" width="720" height="860">
 
      - `result_circum.json`
 
