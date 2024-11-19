@@ -20,13 +20,13 @@
           - `json_front_file`: 앞면 3D 깊이 데이터 (JSON 형식)
           - `json_side_file`: 측면 3D 깊이 데이터 (JSON 형식)
      - **Example**
+
           - `image_front_file`
-          ![Example Image](https://github.com/MustreeAI/fix-coner-algorithm/blob/main/public/wrong_correction_image.png)
 
-
+            ![Example Image](https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/image_front.png)
           - `image_side_file`: 신체 측면 이미지 (PNG 형식)
-          - `json_front_file`: 앞면 3D 깊이 데이터 (JSON 형식)
-          - `json_side_file`: 측면 3D 깊이 데이터 (JSON 형식)
+
+            ![Example Image](https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/image_side.png)
 
 - ### **Response**
      성공적인 요청 시, 응답으로 신체 측정 결과가 포함된 ZIP 파일을 반환합니다.
@@ -36,6 +36,7 @@
           - `key_measure_result.png`: 신체 둘레 측정 결과 이미지
           - `result_circum.json`: 신체 둘레 측정 결과 JSON 데이터
 - ### **Example**
+
 
 
 ## Getting Started
