@@ -23,10 +23,11 @@
 
           - `image_front_file`
 
-            ![Example Image](https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/image_front.jpg)
+              <img src="https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/image_front.jpg" alt="Example Image" width="720" height="860">
+
           - `image_side_file`: 신체 측면 이미지
 
-            ![Example Image](https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/image_side.jpg)
+            <img src="https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/image_side.jpg" alt="Example Image" width="720" height="860">
 
 - ### **Response**
      성공적인 요청 시, 응답으로 신체 측정 결과가 포함된 ZIP 파일을 반환합니다.
@@ -38,7 +39,7 @@
 - ### **Example**
      - `key_measure_result.png`
 
-          ![Example Image](https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/key_measure_result.jpg)
+          <img src="https://github.com/MustreeAI/mustree-sweetsuit-ai-api/blob/main/public/key_measure_result.jpg" alt="Example Image" width="720" height="860">
 
      - `result_circum.json`
 
