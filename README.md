@@ -58,15 +58,10 @@
 - **전체 신체 둘레 계산** : 신체 부위의 앞, 옆 둘레를 회귀식으로 전체 둘레를 추정
 
 ## 고도화 연구
-### 1. Edge detection 기반 keypoint 보정 알고리즘 개발
-#### 문제 상황
-- 2차원에서 찾은 keypoint의 
-- depth값을 0부터 255로 정규화하고, Canny edge detection 알고리즘으로 edge detection
-- 경
+### [고도화 #1 - Canny Edge Detection을 통한 키포인트 보정 알고리즘](https://github.com/MustreeAI/mustree-sweetsuit-ai-api/issues/1)
      
 
-### 2. 배경제거를 통한 Keypoint Detection 정확도 향상
-
+### [고도화 #2 - 배경제거를 통한 Keypoint Detection 정확도 향상](https://github.com/MustreeAI/mustree-sweetsuit-ai-api/issues/2)
 
 
 ### 정확도
