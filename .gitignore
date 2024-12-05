@@ -1,6 +1,15 @@
 # .pth 모델 제외
 *.pth
 
+# __pycache__
+__pycache__
+
+# api_key
+api_key/
+
+# else
+*.log
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
