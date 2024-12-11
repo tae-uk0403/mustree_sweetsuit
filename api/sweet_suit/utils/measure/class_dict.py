@@ -3,6 +3,7 @@
 - measure dict : 측정 대상이 되는 이름과 keypoint의 index 번호를 써준다. keypoint index는 라벨링할 때 찍은 점의 순서가 될 것이다.
   - 예를 들어, 가로가 0, 2 / 세로가 1, 3 이라면 {"Width": [0, 2], "Height": [1, 3]} 과 같이 정의하면 된다.
 """
+
 """
 class_dict = {
     1: (0, 25), 2: (25, 58), 3: (58, 89), 4: (89, 128), 5: (128, 143),
@@ -12,173 +13,69 @@ class_dict = {
 """
 
 class_dict = {
-  "clothes" : {
-    1: (0, 25),
-    2: (25, 58),
-    3: (58, 89),
-    4: (89, 128),
-    5: (128, 143),
-    6: (143, 158),
-    7: (158, 168), 
-    8: (168, 182), 
-    9: (182, 190),
-    10: (190, 219), 
-    11: (219, 256), 
-    12: (256, 275), 
-    13: (275, 294)
-  },
-  "width" : {
-    1: (0, 2)
-  },
-  "height" : {
-    1: (0, 2)
-  },
-  "chest_waist" : {
-    1 : (0, 4)
-  },
-  "handbag" : {
-    1 : (0, 8)
-  },
-  "ice" : {
-    1 : (0, 4)
-  },
-  "coffee_machine" : {
-    1 : (0, 4)
-  },
-  "shoes" : {
-    1 : (0, 4)
-  },
-  "biceps" : {
-    1 : (0, 2)
-  },
-  "eye_horizontal" : {
-    1 : (0, 2)
-  },
-  "tomato" : {
-    1 : (0,4)
-  },
-  "tangerine" : {
-    1 : (0,4)
-  },
-  "refrigerator" : {
-    1 : (0,4)
-  },
-  "waist_upper_front" : {
-    1 : (0,2)
-  },
-  "waist_upper_side" : {
-    1 : (0,2)
-  },
-  "hips_lower_front" : {
-    1 : (0,2)
-  },
-  "hips_lower_side" : {
-    1 : (0,2)
-  },
-  "pelvis_lower_front" : {
-    1 : (0,2)
-  },
-  "pelvis_lower_side" : {
-    1 : (0,2)
-  },
-  "chest_upper_front" : {
-    1 : (0,2)
-  },
-  "chest_upper_side" : {
-    1 : (0,2)
-  },
-  "leg_lower_front" : {
-    1 : (0,2)
-  },
-  "upper_removed_front" :{
-    1 : (0, 4)
-  },
-  "upper_removed_side" :{
-    1 : (0, 4)
-  },
-  "lower_removed_front" :{
-    1 : (0, 6)
-  },
-  "lower_removed_side" :{
-    1 : (0, 4)
-  }
-  
-  
-  
-  
+    "clothes": {
+        1: (0, 25),
+        2: (25, 58),
+        3: (58, 89),
+        4: (89, 128),
+        5: (128, 143),
+        6: (143, 158),
+        7: (158, 168),
+        8: (168, 182),
+        9: (182, 190),
+        10: (190, 219),
+        11: (219, 256),
+        12: (256, 275),
+        13: (275, 294),
+    },
+    "width": {1: (0, 2)},
+    "height": {1: (0, 2)},
+    "chest_waist": {1: (0, 4)},
+    "handbag": {1: (0, 8)},
+    "ice": {1: (0, 4)},
+    "coffee_machine": {1: (0, 4)},
+    "shoes": {1: (0, 4)},
+    "biceps": {1: (0, 2)},
+    "eye_horizontal": {1: (0, 2)},
+    "tomato": {1: (0, 4)},
+    "tangerine": {1: (0, 4)},
+    "refrigerator": {1: (0, 4)},
+    "waist_upper_front": {1: (0, 2)},
+    "waist_upper_side": {1: (0, 2)},
+    "hips_lower_front": {1: (0, 2)},
+    "hips_lower_side": {1: (0, 2)},
+    "pelvis_lower_front": {1: (0, 2)},
+    "pelvis_lower_side": {1: (0, 2)},
+    "chest_upper_front": {1: (0, 2)},
+    "chest_upper_side": {1: (0, 2)},
+    "leg_lower_front": {1: (0, 2)},
+    "upper_removed_front": {1: (0, 4)},
+    "upper_removed_side": {1: (0, 4)},
+    "lower_removed_front": {1: (0, 6)},
+    "lower_removed_side": {1: (0, 4)},
 }
 
 measure_dict = {
-  "width": {
-    "width" : [1, 2]
-  },
-  "height": {
-    "height" : [1, 2]
-  },
-  "chest_waist": {
-    "chest" : [1, 2],
-    "waist" : [3, 4]
-  },
-  "handbag" : {
-    "width" : [1, 3],
-    "height" : [4, 8]
-  },
-  "ice":{
-    "width": [1, 2],
-    "height" : [1, 4]
-  },
-  "coffee_machine":{
-    "width": [1, 2],
-    "height" : [2, 3]
-  },
-  "refrigerator":{
-    "width": [1, 2],
-    "height" : [2, 3]
-  },
-  "waist_upper_side":{
-    "waist": [1, 2]
-  },
-  "waist_upper_front":{
-    "waist": [1, 2]
-  },
-  "hips_lower_side":{
-    "hips": [1, 2]
-  },
-  "hips_lower_front":{
-    "hips": [1, 2]
-  }, 
-  "pelvis_lower_side":{
-    "pelvis": [1, 2]
-  },
-  "pelvis_lower_front":{
-    "pelvis": [1, 2]
-  },  
-  "chest_upper_front":{
-    "chest": [1, 2]
-  },
-  "chest_upper_side":{
-    "chest": [1, 2]
-  },
-  "leg_lower_front":{
-    "leg": [1, 2]
-  }, 
-  "upper_removed_side" :{
-    "chest" : [1, 2],
-    "waist" : [3, 4]
-  },
-  "upper_removed_front" :{
-    "chest" : [1, 2],
-    "waist" : [3, 4]
-  },
-  "lower_removed_front" :{
-    "pelvis" : [1, 2],
-    "hips" : [3, 4],
-    "leg" : [5, 6]
-  },
-  "lower_removed_side" :{
-    "pelvis" : [1, 2],
-    "hips" : [3, 4]
-  }
+    "width": {"width": [1, 2]},
+    "height": {"height": [1, 2]},
+    "chest_waist": {"chest": [1, 2], "waist": [3, 4]},
+    "handbag": {"width": [1, 3], "height": [4, 8]},
+    "ice": {"width": [1, 2], "height": [1, 4]},
+    "coffee_machine": {"width": [1, 2], "height": [2, 3]},
+    "refrigerator": {"width": [1, 2], "height": [2, 3]},
+    "waist_upper_side": {"waist": [1, 2]},
+    "waist_upper_front": {"waist": [1, 2]},
+    "hips_lower_side": {"hips": [1, 2]},
+    "hips_lower_front": {"hips": [1, 2]},
+    "pelvis_lower_side": {"pelvis": [1, 2]},
+    "pelvis_lower_front": {"pelvis": [1, 2]},
+    "chest_upper_front": {"chest": [1, 2]},
+    "chest_upper_side": {"chest": [1, 2]},
+    "leg_lower_front": {"leg": [1, 2]},
+    "upper_removed_side": {"chest": [1, 2], "waist": [3, 4]},
+    "upper_removed_front": {"chest": [1, 2], "waist": [3, 4]},
+    "lower_removed_front": {"pelvis": [1, 2], "hips": [3, 4], "leg": [5, 6]},
+    "lower_removed_side": {"pelvis": [1, 2], "hips": [3, 4]},
 }
 
 
@@ -354,34 +251,3 @@ measure_dict = {
 #         }
 #     }
 # }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

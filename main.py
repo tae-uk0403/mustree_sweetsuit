@@ -23,8 +23,8 @@ app = FastAPI(
 
 UpperOrLower = Literal["upper", "lower"]
 
+
 def save_file(file: UploadFile, path: Path):
-    """파일을 동기적으로 저장합니다."""
     try:
         path.parent.mkdir(parents=True, exist_ok=True)  # 부모 디렉토리 생성
         with path.open("wb") as f:  # 동기적으로 파일 열기
@@ -36,26 +36,35 @@ def save_file(file: UploadFile, path: Path):
 
 
 def prepare_task_folder(upper_or_lower: str) -> Path:
-    """작업 폴더를 동기적으로 생성하고 경로를 반환합니다."""
     now_date = datetime.now().strftime("%Y%m%d%H%M%S%f")
-    task_folder = Path(f'api/sweet_suit/temp_process_task_files/{upper_or_lower}/{now_date}')
+    task_folder = Path(
+        f"api/sweet_suit/temp_process_task_files/{upper_or_lower}/{now_date}"
+    )
     task_folder.mkdir(parents=True, exist_ok=True)  # 디렉토리 생성
     logging.info(f"Task folder prepared at: {task_folder}")
     return task_folder
 
 
-
-
-@app.post('/api/v1.0/sweet_suit/{upper_or_lower}',
-          tags=["API Reference"],
-          status_code=status.HTTP_200_OK,
-          response_class=FileResponse)
+@app.post(
+    "/api/v1.0/sweet_suit/{upper_or_lower}",
+    tags=["API Reference"],
+    status_code=status.HTTP_200_OK,
+    response_class=FileResponse,
+)
 async def sweet_suit(
     upper_or_lower: UpperOrLower,
-    image_front_file: Annotated[UploadFile, File(media_type="image/png", description="Front body image")],
-    image_side_file: Annotated[UploadFile, File(media_type="image/png", description="Side body image")],
-    json_front_file: Annotated[UploadFile, File(media_type="text/json", description="Front depth data")],
-    json_side_file: Annotated[UploadFile, File(media_type="text/json", description="Side depth data")],
+    image_front_file: Annotated[
+        UploadFile, File(media_type="image/png", description="Front body image")
+    ],
+    image_side_file: Annotated[
+        UploadFile, File(media_type="image/png", description="Side body image")
+    ],
+    json_front_file: Annotated[
+        UploadFile, File(media_type="text/json", description="Front depth data")
+    ],
+    json_side_file: Annotated[
+        UploadFile, File(media_type="text/json", description="Side depth data")
+    ],
     api_key: str = Depends(verify_api_key),
 ):
     """
@@ -72,7 +81,7 @@ async def sweet_suit(
     """
     try:
         logging.info("Preparing task folder...")
-        
+
         task_folder = prepare_task_folder(upper_or_lower)
         print(task_folder)
         # 파일 저장
@@ -82,12 +91,14 @@ async def sweet_suit(
         save_file(json_side_file, task_folder / "depth_side.json")
 
         # 측정 실행
-        os_name = "android" if api_key == 'android' else "ios"
-        _, result_image_path = run_sweet_suit2(task_folder, upper_or_lower, upper_or_lower, api_key)
+        os_name = "android" if api_key == "android" else "ios"
+        _, result_image_path = run_sweet_suit2(
+            task_folder, upper_or_lower, upper_or_lower, api_key
+        )
 
         # ZIP 파일 생성
         zip_file_path = task_folder / f"{upper_or_lower}_result.zip"
-        with zipfile.ZipFile(zip_file_path, 'w') as zipf:
+        with zipfile.ZipFile(zip_file_path, "w") as zipf:
             for file_name in ["key_measure_result.png", "result_circum.json"]:
                 file_path = task_folder / file_name
                 if file_path.exists():
@@ -98,8 +109,10 @@ async def sweet_suit(
         logging.info(f"Returning ZIP file: {zip_file_path}")
         return FileResponse(
             zip_file_path,
-            media_type='application/zip',
-            headers={"Content-Disposition": f"attachment; filename={upper_or_lower}_result.zip"}
+            media_type="application/zip",
+            headers={
+                "Content-Disposition": f"attachment; filename={upper_or_lower}_result.zip"
+            },
         )
 
     except Exception as e:

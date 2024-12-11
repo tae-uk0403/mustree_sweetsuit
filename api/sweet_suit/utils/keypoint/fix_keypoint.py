@@ -8,11 +8,10 @@ def fix_keypoint(task_folder_path, world_xyz_array, keypoint_y, keypoint_x_list)
     XYZ 배열을 기반으로 Canny 엣지 감지 수행 후, 주어진 키포인트 좌표에서 가장 가까운 엣지 좌표 반환.
     """
     edges = detect_edges(world_xyz_array)
-    
 
     closest_points = find_closest_edge_points(edges, keypoint_y, keypoint_x_list)
     save_edges_image(edges, task_folder_path, closest_points)
-    
+
     return closest_points
 
 
@@ -34,16 +33,31 @@ def save_edges_image(edges, task_folder_path, closest_points):
     annotated_edges = edges.copy()
     for i in range(2):
         # 좌표에 원 그리기
-        cv2.circle(annotated_edges, (int(closest_points[i][0]), int(closest_points[i][1])), 8, (255, 0, 0), -1)
+        cv2.circle(
+            annotated_edges,
+            (int(closest_points[i][0]), int(closest_points[i][1])),
+            8,
+            (255, 0, 0),
+            -1,
+        )
         # 좌표에 텍스트 추가
-        cv2.putText(annotated_edges, str(i),
-                    (int(closest_points[i][0]), int(closest_points[i][1])),
-                    fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-                    fontScale=1.0, color=(255, 20, 147), thickness=1, lineType=cv2.LINE_AA)
-    
+        cv2.putText(
+            annotated_edges,
+            str(i),
+            (int(closest_points[i][0]), int(closest_points[i][1])),
+            fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+            fontScale=1.0,
+            color=(255, 20, 147),
+            thickness=1,
+            lineType=cv2.LINE_AA,
+        )
+
     # 이미지를 저장할 경로 설정
-    output_path = Path(task_folder_path) / f"edges_image_{closest_points[0][0]}_{closest_points[0][1]}.png"
-    
+    output_path = (
+        Path(task_folder_path)
+        / f"edges_image_{closest_points[0][0]}_{closest_points[0][1]}.png"
+    )
+
     # 최종 이미지 저장
     cv2.imwrite(str(output_path), annotated_edges)
 
@@ -63,7 +77,7 @@ def get_nearest_points(x_list, keypoint_x_list):
     """
     min_value_1, min_value_2 = 255, 255
     answer_1, answer_2 = [], []
-    
+
     for x in x_list:
         if abs(x - keypoint_x_list[0]) < min_value_1:
             answer_1.append(x)
@@ -76,7 +90,7 @@ def get_nearest_points(x_list, keypoint_x_list):
         answer_1.append(keypoint_x_list[0])
     if len(answer_2) == 0:
         answer_2.append(keypoint_x_list[1])
-        
+
     return answer_1[-1], answer_2[-1]
 
 
@@ -84,19 +98,11 @@ def normalize_depth(depth_array):
     """
     깊이 배열을 0-255 범위로 정규화
     """
-    return ((depth_array - depth_array.min()) / (depth_array.max() - depth_array.min()) * 255).astype(np.uint8)
-
-
-
-
-
-
-
-
-
-
-
-
+    return (
+        (depth_array - depth_array.min())
+        / (depth_array.max() - depth_array.min())
+        * 255
+    ).astype(np.uint8)
 
 
 # def fix_class_keypoint(task_folder_path, world_xyz_array, model_name, class_keypoints):
@@ -113,9 +119,9 @@ def normalize_depth(depth_array):
 
 
 # def fix_keypoint(task_folder_path, world_xyz_array, keypoint_y, keypoint_x_list):
-    
+
 #     edges = cv2.Canny(normarlize_depth(np.sqrt(world_xyz_array[:, :, 0]**2 + world_xyz_array[:, :, 1]**2 + world_xyz_array[:, :, 2]**2)), 10, 50)
-    
+
 #     output_path = Path(task_folder_path /"edges_image_{keypoint_y}_{keypoint_x_list[1]}.png")
 
 #     # 이미지 저장 (PNG 형식으로 저장)
@@ -123,13 +129,13 @@ def normalize_depth(depth_array):
 
 #     # keypoint_y = int(keypoint_y / 7.5)
 #     # keypoint_x_list = [int(keypoint_x_list[0] / 7.5), int(keypoint_x_list[1] / 7.5)]
-    
+
 #     indices = np.where(edges == 255)
 #     xy_list = []
 #     for i in range(len(indices[0])):
 #         xy_list.append([indices[1][i], indices[0][i]])
 #     x_list = indices[1][indices[0] == keypoint_y]
-    
+
 #     min_value_1 = 255
 #     min_value_2 = 255
 #     answer_1=[]
@@ -141,16 +147,15 @@ def normalize_depth(depth_array):
 #         if abs(i-keypoint_x_list[1]) < min_value_2:
 #             answer_2.append(i)
 #             min_value_2 = abs(i-keypoint_x_list[1])
-            
+
 #     print("answer_1 is", answer_1)
 #     if len(answer_1)==0:
 #         answer_1.append(keypoint_x_list[0])
 #     if len(answer_2)==0:
 #         answer_2.append(keypoint_x_list[1])
-    
+
 #     return [answer_1[-1]+1,keypoint_y], [answer_2[-1]-1,keypoint_y]
 
 # def normarlize_depth(depth_array):
 #     scaled_array = ((depth_array - depth_array.min()) / (depth_array.max() - depth_array.min()) * 255).astype(np.uint8)
 #     return scaled_array
-
