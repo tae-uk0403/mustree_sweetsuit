@@ -80,7 +80,7 @@ def adjust_keypoints(task_folder_path, world_xyz_array, target_point_1, target_p
     return target_point_1, target_point_2
 
 
-def calculate_3d_length(world_xyz_array, target_point_1, target_point_2, api_key):
+def calculate_3d_length(world_xyz_array, target_point_1, target_point_2):
     length_3d = 0
     for i in range(target_point_1[0], target_point_2[0] - 1):
         try:
@@ -91,8 +91,6 @@ def calculate_3d_length(world_xyz_array, target_point_1, target_point_2, api_key
                 )
                 * 100
             )
-            if api_key == "android":
-                pixel_length /= 4.25
             if pixel_length < 3:
                 length_3d += pixel_length
         except IndexError:
@@ -138,7 +136,6 @@ def measure_3D_distance2(
     world_xyz_array,
     rgb_depth_ratio,
     RGB_image,
-    api_key,
 ):
     for measure_name, measure_points in measure_dict.items():
         target_point_1 = np.array(
@@ -161,8 +158,6 @@ def measure_3D_distance2(
                 )
                 * 100
             )
-            if api_key == "android":
-                pixel_length /= 4.25
             measure_3d_result_dict[measure_name] = pixel_length
             return measure_3d_result_dict, RGB_image
 
@@ -170,9 +165,7 @@ def measure_3D_distance2(
         target_point_1, target_point_2 = adjust_keypoints(
             task_folder_path, world_xyz_array, target_point_1, target_point_2
         )
-        length_3d = calculate_3d_length(
-            world_xyz_array, target_point_1, target_point_2, api_key
-        )
+        length_3d = calculate_3d_length(world_xyz_array, target_point_1, target_point_2)
 
         # 결과 저장
         if measure_name in measure_3d_result_dict:

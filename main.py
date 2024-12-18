@@ -3,13 +3,15 @@ from fastapi.responses import FileResponse
 from datetime import datetime
 from typing import Literal, Annotated
 from pathlib import Path
-import aiofiles
 import os
 import zipfile
 import logging
+import time
+import cProfile
+import pstats
+import io
 
 # 의존성 함수 임포트
-from api_key.verify_api_key import verify_api_key
 from api.sweet_suit.sweet_suit import run_sweet_suit2
 
 # 로깅 설정
@@ -65,7 +67,6 @@ async def sweet_suit(
     json_side_file: Annotated[
         UploadFile, File(media_type="text/json", description="Side depth data")
     ],
-    api_key: str = Depends(verify_api_key),
 ):
     """
     **사용자 신체 측정을 위한 API**
@@ -79,6 +80,12 @@ async def sweet_suit(
     **Response**:
     - 측정 결과가 포함된 이미지 파일을 ZIP 형식으로 반환합니다.
     """
+    # cProfile을 사용하여 프로파일링 시작
+    pr = cProfile.Profile()
+    pr.enable()  # 프로파일링 시작
+
+    start_time = time.time()  # 시작 시간 기록
+
     try:
         logging.info("Preparing task folder...")
 
@@ -91,9 +98,8 @@ async def sweet_suit(
         save_file(json_side_file, task_folder / "depth_side.json")
 
         # 측정 실행
-        os_name = "android" if api_key == "android" else "ios"
         _, result_image_path = run_sweet_suit2(
-            task_folder, upper_or_lower, upper_or_lower, api_key
+            task_folder, upper_or_lower, upper_or_lower
         )
 
         # ZIP 파일 생성
@@ -107,6 +113,11 @@ async def sweet_suit(
                     logging.warning(f"Missing expected file: {file_name}")
 
         logging.info(f"Returning ZIP file: {zip_file_path}")
+
+        end_time = time.time()  # 종료 시간 기록
+        elapsed_time = end_time - start_time  # 경과 시간 계산
+        logging.info(f"Elapsed time: {elapsed_time:.2f} seconds")  # 경과 시간 로그
+
         return FileResponse(
             zip_file_path,
             media_type="application/zip",
@@ -118,3 +129,12 @@ async def sweet_suit(
     except Exception as e:
         logging.error(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
+
+    finally:
+        pr.disable()  # 프로파일링 종료
+        # 프로파일링 결과를 메모리에 저장
+        s = io.StringIO()
+        sortby = pstats.SortKey.CUMULATIVE  # 누적 시간 기준으로 정렬
+        ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+        ps.print_stats()  # 프로파일링 결과 출력
+        logging.info(s.getvalue())  # 로그에 프로파일링 결과 기록
