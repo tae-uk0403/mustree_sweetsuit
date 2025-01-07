@@ -16,7 +16,7 @@ COPY pyproject.toml poetry.lock /app/
 # Poetry 설치 및 의존성 설치
 RUN pip install poetry && \
     poetry config virtualenvs.create false && \
-    poetry install --no-dev --no-root
+    poetry install --no-root
 
 # 애플리케이션 소스 코드 복사
 COPY . /app
