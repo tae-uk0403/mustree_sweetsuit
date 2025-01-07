@@ -23,6 +23,7 @@ plyfile = "^1.1"
 python-multipart = "^0.0.16"
 aiofiles = "^24.1.0"
 tqdm = "^4.66.6"
+pytest = "^8.3.4"
 
 
 [build-system]
