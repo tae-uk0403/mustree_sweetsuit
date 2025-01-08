@@ -1,5 +1,6 @@
 # .pth 모델 제외
 *.pth
+*.png
 
 # __pycache__
 __pycache__
