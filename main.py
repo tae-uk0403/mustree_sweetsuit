@@ -85,6 +85,7 @@ async def sweet_suit(
     pr.enable()  # 프로파일링 시작
 
     start_time = time.time()  # 시작 시간 기록
+    logging.info("1-succeed")
 
     try:
         logging.info("Preparing task folder...")
