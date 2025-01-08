@@ -10,7 +10,8 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    # 자체 호스팅 러너를 사용하도록 설정
+    runs-on: [self-hosted, Linux, X64]
 
     steps:
     # 1. 저장소 체크아웃
@@ -36,17 +37,17 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # 4. Docker 이미지 빌드
+    # 4. Docker 이미지 빌드 (GPU 지원)
     - name: Build Docker Image
       run: |
-        docker build -t ntw0403/sweetsuit:1.0 .
+        docker build --build-arg BASE_IMAGE=nvidia/cuda:12.1.1-base-ubuntu20.04 -t ntw0403/sweetsuit:1.0 .
 
     # 5. Docker 이미지 푸시
     - name: Push Docker Image
       run: |
         docker push ntw0403/sweetsuit:1.0
 
-    # 6. Docker 컨테이너 실행 (선택 사항)
-    - name: Run Docker container locally
+    # 6. Docker 컨테이너 실행 (GPU 지원)
+    - name: Run Docker container with GPU
       run: |
-        docker run -d -p 8108:8108 ntw0403/sweetsuit:1.0
+        docker run --gpus all -d -p 8108:8108 ntw0403/sweetsuit:1.0
