@@ -27,7 +27,7 @@ jobs:
       run: |
         pip install poetry
         poetry install --no-root
-        python pytest
+        pytest
 
     # 3. Docker 로그인
     - name: Log in to Docker Hub
