@@ -28,6 +28,7 @@ anyio = "^4.8.0"
 pytest-asyncio = "^0.25.1"
 pytest-anyio = "^0.0.0"
 httpx = "^0.28.1"
+onnxruntime = "^1.20.1"
 
 
 [build-system]
