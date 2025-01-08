@@ -7,7 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
-fastapi = "^0.115.3"
 gunicorn = "^23.0.0"
 uvicorn = "^0.32.0"
 pytz = "^2024.2"
@@ -24,6 +23,10 @@ python-multipart = "^0.0.16"
 aiofiles = "^24.1.0"
 tqdm = "^4.66.6"
 pytest = "^8.3.4"
+fastapi = "^0.115.6"
+anyio = "^4.8.0"
+pytest-asyncio = "^0.25.1"
+pytest-anyio = "^0.0.0"
 
 
 [build-system]
