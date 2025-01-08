@@ -12,19 +12,19 @@ def test_sweet_suit_success():
     files = {
         "image_front_file": (
             "image_front.jpg",
-            open("test/test_data/image_front.jpg", "rb"),
+            open("tests/test_data/image_front.jpg", "rb"),
         ),
         "image_side_file": (
             "image_side.jpg",
-            open("test/test_data/image_side.jpg", "rb"),
+            open("tests/test_data/image_side.jpg", "rb"),
         ),
         "json_front_file": (
             "depth_front.json",
-            open("test/test_data/depth_front.json", "rb"),
+            open("tests/test_data/depth_front.json", "rb"),
         ),
         "json_side_file": (
             "depth_side.json",
-            open("test/test_data/depth_side.json", "rb"),
+            open("tests/test_data/depth_side.json", "rb"),
         ),
     }
     response = client.post("/api/v1.0/sweet_suit/upper", files=files)
