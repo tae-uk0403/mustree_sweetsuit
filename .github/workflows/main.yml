@@ -108,8 +108,3 @@ jobs:
     - name: Push Docker Image
       run: |
         docker push ntw0403/sweetsuit:1.0
-
-    # 8. Docker 컨테이너 실행 (GPU 지원)
-    - name: Run Docker container with GPU
-      run: |
-        docker run --gpus all -d -p 8108:8108 ntw0403/sweetsuit:1.0
