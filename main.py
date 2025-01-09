@@ -86,6 +86,7 @@ async def sweet_suit(
 
     start_time = time.time()  # 시작 시간 기록
     logging.info("1-succeed")
+    print("pppppppppppppppppppppppp")
 
     try:
         logging.info("Preparing task folder...")
