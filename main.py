@@ -89,6 +89,7 @@ async def sweet_suit(
 
     try:
         logging.info("Preparing task folder...")
+        logging.info("!!!!!!!!!!!!!here!!!!!!!!!!!!")
 
         task_folder = prepare_task_folder(upper_or_lower)
         print(task_folder)
