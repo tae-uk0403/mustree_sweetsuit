@@ -27,7 +27,7 @@ def test_sweet_suit_success():
             open("tests/test_data/depth_side.json", "rb"),
         ),
     }
-    response = client.post("/api/v1.0/sweet_suit/upper", files=files)
+    response = client.post("/api/v1.0/sweet_suit/female/upper", files=files)
     assert response.status_code == 200
     assert response.headers["content-type"] == "application/zip"
 
