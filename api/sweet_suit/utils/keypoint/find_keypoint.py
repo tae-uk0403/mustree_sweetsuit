@@ -1,6 +1,8 @@
 import cv2
 import torch
 import numpy as np
+import asyncio
+
 import torchvision.transforms as transforms
 from . import pose_hrnet
 from ..measure.class_dict import *
@@ -11,7 +13,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 
-def find_keypoint2(
+def find_keypoint(
     task_folder_path, body_position, model_name, model_position, image_name
 ):
 
@@ -115,3 +117,19 @@ def find_keypoint2(
 
     key_result = np.array(f_preds)  # 최종 keypoints 좌표들
     return key_result
+
+
+async def async_find_keypoints(
+    task_folder_path, upper_or_lower, model_name, model_name_with_position, image_name
+):
+    """비동기로 키포인트 탐지 처리"""
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(
+        None,
+        find_keypoint,
+        task_folder_path,
+        upper_or_lower,
+        model_name,
+        model_name_with_position,
+        image_name,
+    )

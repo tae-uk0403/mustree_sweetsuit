@@ -98,7 +98,7 @@ def calculate_3d_length(world_xyz_array, target_point_1, target_point_2):
     return length_3d
 
 
-def apply_measurement_scaling(measure_3d_result_dict, measure_name):
+def apply_measurement_scaling(measure_3d_result_dict, measure_name, gender):
     scaling_factors = {"chest": 1.427, "waist": 1.322, "pelvis": 1.322, "hips": 1.53}
     model_name_map = {
         "chest": "가슴",
@@ -108,6 +108,8 @@ def apply_measurement_scaling(measure_3d_result_dict, measure_name):
     }
     if measure_name in scaling_factors:
         measure_3d_result_dict[measure_name] *= scaling_factors[measure_name]
+        if gender == "female":
+            measure_3d_result_dict[measure_name] *= 0.8
         json_model_name = model_name_map[measure_name]
     else:
         json_model_name = measure_name
@@ -130,12 +132,12 @@ def save_measurement_to_json(task_folder_path, json_model_name, measure_value):
 def measure_3D_distance2(
     task_folder_path,
     model_name,
+    gender,
     measure_3d_result_dict,
     measure_dict,
     detected_keypoints,
     world_xyz_array,
     rgb_depth_ratio,
-    RGB_image,
 ):
     for measure_name, measure_points in measure_dict.items():
         target_point_1 = np.array(
@@ -159,7 +161,7 @@ def measure_3D_distance2(
                 * 100
             )
             measure_3d_result_dict[measure_name] = pixel_length
-            return measure_3d_result_dict, RGB_image
+            return measure_3d_result_dict
 
         # 3D 길이 계산
         target_point_1, target_point_2 = adjust_keypoints(
@@ -171,12 +173,11 @@ def measure_3D_distance2(
         if measure_name in measure_3d_result_dict:
             measure_3d_result_dict[measure_name] += length_3d
             json_model_name = apply_measurement_scaling(
-                measure_3d_result_dict, measure_name
+                measure_3d_result_dict, measure_name, gender
             )
             save_measurement_to_json(
                 task_folder_path, json_model_name, measure_3d_result_dict[measure_name]
             )
         else:
             measure_3d_result_dict[measure_name] = length_3d
-
-    return measure_3d_result_dict, RGB_image
+    return measure_3d_result_dict

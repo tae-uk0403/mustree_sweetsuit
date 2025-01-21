@@ -545,7 +545,6 @@ blocks_dict = {"BASIC": BasicBlock, "BOTTLENECK": Bottleneck}
 
 
 class PoseHighResolutionNet(nn.Module):
-
     def __init__(self):
         self.inplanes = 64
         self.model_name = "pose_hrnet"
