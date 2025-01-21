@@ -12,7 +12,7 @@ import pstats
 import io
 
 # 의존성 함수 임포트
-from api.sweet_suit.sweet_suit import run_sweet_suit2
+from api.sweet_suit.sweet_suit import run_sweet_suit
 
 # 로깅 설정
 logging.basicConfig(level=logging.DEBUG)
@@ -24,6 +24,7 @@ app = FastAPI(
 )
 
 UpperOrLower = Literal["upper", "lower"]
+gender = Literal["male", "female"]
 
 
 def save_file(file: UploadFile, path: Path):
@@ -48,13 +49,14 @@ def prepare_task_folder(upper_or_lower: str) -> Path:
 
 
 @app.post(
-    "/api/v1.0/sweet_suit/{upper_or_lower}",
+    "/api/v1.0/sweet_suit/{gender}/{upper_or_lower}",
     tags=["API Reference"],
     status_code=status.HTTP_200_OK,
     response_class=FileResponse,
 )
 async def sweet_suit(
     upper_or_lower: UpperOrLower,
+    gender: gender,
     image_front_file: Annotated[
         UploadFile, File(media_type="image/png", description="Front body image")
     ],
@@ -72,6 +74,7 @@ async def sweet_suit(
     **사용자 신체 측정을 위한 API**
 
     - **upper_or_lower**: 상체(`upper`) 또는 하체(`lower`)를 지정합니다.
+    - **gender**: 측정 대상의 성별을 지정합니다.
     - **image_front_file**: 신체 앞면 이미지.
     - **image_side_file**: 신체 측면 이미지.
     - **json_front_file**: 앞면 3D 깊이 데이터.
@@ -99,8 +102,8 @@ async def sweet_suit(
         save_file(json_side_file, task_folder / "depth_side.json")
 
         # 측정 실행
-        _, result_image_path = run_sweet_suit2(
-            task_folder, upper_or_lower, upper_or_lower
+        _, result_image_path = await run_sweet_suit(
+            task_folder, upper_or_lower, upper_or_lower, gender
         )
 
         # ZIP 파일 생성
