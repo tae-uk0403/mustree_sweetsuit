@@ -10,8 +10,6 @@
                - `upper` : 상체 측정
                - `lower` : 하체 측정
 
-     - **Headers**
-          - `api_key`: API 호출에 필요한 인증 키 (의존성 검사 사용)
      - **Files**
           - `image_front_file`: 신체 앞면 이미지 (PNG 형식)
           - `image_side_file`: 신체 측면 이미지 (PNG 형식)
